@@ -142,9 +142,15 @@ mongoose.connect(url, function (err) {
         });
     })
 
+    app.get('/getcompletedtask', function (req, res) {
+        Task.find({'status': 'COMPLETE'}).sort({taskName: -1
+        }).limit(3).exec(function (err, data) {
+            res.render(viewpath + 'listtask.html', {task:data});
+        });
+    });;
 })
 
-app.get('/', function(req,res){
+app.get('/', function (req, res) {
     res.sendFile(viewpath + 'index.html');
 })
 
