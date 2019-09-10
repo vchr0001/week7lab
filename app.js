@@ -79,9 +79,8 @@ mongoose.connect(url, function (err) {
     })
     app.post('/deletebyid', function (req, res) {
         let taskID = req.body.id;
-        var fileId = mongoose.Types.ObjectId(taskID);
         Task.deleteOne({
-            _id: fileId
+            _id: taskID
         }, function (err, doc) {
             console.log('delete success');
         })
@@ -93,9 +92,8 @@ mongoose.connect(url, function (err) {
     })
     app.post('/updatetask', function (req, res) {
         let taskID = req.body;
-        var fileId = mongoose.Types.ObjectId(taskID.id);
         Task.updateOne({
-            _id: fileId
+            _id: taskID.id
         }, {
             $set: {
                 'status': taskID.statusnew
